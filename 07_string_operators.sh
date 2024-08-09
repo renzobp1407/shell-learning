@@ -8,9 +8,10 @@ echo ${#STRING} #16
 
 STRING2="this is a string"
 SUBSTRING="hat"
-RESULT=$(expr index "$STRING2" "$SUBSTRING")
-echo ${RESULT}
-#expr index "$STRING2" "$SUBSTRING"
+#RESULT=$(expr index "$STRING2" "$SUBSTRING")
+#echo ${RESULT}
+EXP=expr index "$STRING2" "$SUBSTRING"
+echo $EXP
 
 # expr index search the first character of "substring" in this case "H" in STRING and will return 2
 
@@ -38,3 +39,44 @@ COMMA2=`expr index "$CHOP1FIELD" ','`
 LENGTH=`expr $COMMA2 - 6 - 1`
 FIRSTNAME=${CHOP1FIELD:6:$LENGTH}      # Johnny Boy
 echo $FIRSTNAME
+
+# String replacement, first ocurrence
+STRING4="to be or not to be"
+echo ${STRING4[@]/be/eat}        # to eat or not to be
+
+#String replacement, all ocurrence, 2 backslash
+STRING="to be or not to be"
+echo ${STRING[@]//be/eat}    # to eat or not to eat
+
+#delete all ocurrence
+STRING="to be or not to be"
+echo ${STRING[@]// not/}   
+
+#replace all ocurrence of string if at the begining starts with the string
+STRING="to be or not to be"
+echo ${STRING[@]/#to be/eat now}    # eat now or not to be
+
+#replace all ocurrence of string if at the end with the string
+STRING="to be or not to be"
+echo ${STRING[@]/%be/eat}        # to be or not to eat
+
+# Replace ocurrence with a substring with shell output command
+STRING="to be or not to be"
+echo ${STRING[@]/%be/be on $(date +%Y-%m-%d)}    # to be or not to be on 2012-06-14
+
+#exercise
+BUFFETT="Life is like a snowball. The important thing is finding wet snow and a really long hill."
+
+    # write your code here
+    ISAY=$BUFFETT
+    change1=${ISAY[@]/snow/foot}
+    change2=${change1[@]//snow/}
+    change3=${change2[@]/finding/getting}
+    loc=`expr index "$change3" 'w'`
+    ISAY=${change3::$loc+2}
+
+# Test code - do not modify
+echo "Warren Buffett said:"
+echo $BUFFETT
+echo "and I say:"
+echo "$ISAY"

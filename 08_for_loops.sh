@@ -15,3 +15,30 @@ for f in $( ls prog.sh /etc/localtime ) ; do
   echo "File is: $f"
 done
 
+# basic construct
+while [ condition ]
+do
+ command(s)...
+done
+
+
+COUNT=4
+while [ $COUNT -gt 0 ]; do
+  echo "Value of count is: $COUNT"
+  COUNT=$(($COUNT - 1))
+done
+
+# bash until loop
+
+# basic construct
+until [ condition ]
+do
+ command(s)...
+done
+
+COUNT=1
+until [ $COUNT -gt 5 ]; do
+  echo "Value of count is: $COUNT"
+  COUNT=$(($COUNT + 1))
+done
+

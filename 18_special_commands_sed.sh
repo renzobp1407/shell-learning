@@ -82,5 +82,3 @@ Example:
 $ sed '/abc/d' filename.txt
 
 
-#  
-#
